@@ -23,9 +23,9 @@ T dot(Vec3<T> A, Vec3<T> B) {
 
 template <typename T>
 T cross(Vec3<T> A, Vec3<T> B) {
-	return Vec3(
+	return Vec3<T>(
 		A.y * B.z - A.z * B.y,
 		A.z * B.x - A.x * B.z,
-		A.x * B.y - A.y * B.x,
+		A.x * B.y - A.y * B.x
 	);
 }
