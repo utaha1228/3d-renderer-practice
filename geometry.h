@@ -1,5 +1,3 @@
-#include <vector>
-
 template <typename T>
 class Vec3 {
 	T x;

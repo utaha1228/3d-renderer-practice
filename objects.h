@@ -11,3 +11,7 @@ class Sphere: Object {
 	Vec3<double> center;
 	double r;
 };
+
+class Light: Object {
+	double intensity;
+}
