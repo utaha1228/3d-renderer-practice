@@ -23,8 +23,8 @@ objs: the objects on the map, including the light source.
 
 Return a 2D color array which represents the rendered image. Index i, j represents 
 the pixel at row i (from bottom to top) and column j (from left to right).
-
 */
+
 vector<vector<RGB>> render(Vec3<double> camera_pos, Vec3<double> camera_angle, 
 	double horizontal_view, double vertical_view, int img_width, int img_height, 
 	vector<Object> objs) {

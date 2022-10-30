@@ -1,3 +1,6 @@
+#include <utility>
+using namespace std;
+
 template <typename T>
 struct Vec3 {
 	T x;
@@ -26,18 +29,30 @@ struct Vec3 {
 
 };
 
+enum Itsct_stat {
+	INSIDE,
+	NO_INTERSECTION,
+	HAS_INTERSECTION,
+};
+
 struct Object {
 	double ambient_coef;
 	double diffuse_coef;
 	double specular_coef;
 	double shininess;
+
+	pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
 };
 
 struct Sphere: Object {
 	Vec3<double> center;
 	double r;
+
+	pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
 };
 
 struct Light: Object {
 	double intensity;
+
+	pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
 };

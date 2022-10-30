@@ -1,16 +1,19 @@
 #include <math.h>
+#include <utility>
 #include "geometry.h"
-
+using namespace std;
 // Assignment
+
+#define eps 1e-7
 
 template <typename T>
 Vec3<T> & Vec3<T>::operator = (const Vec3<T> & rhs) {
 	if (this == &rhs) { // avoid self assignment
 		return *this;
 	}
-	this->x = rhs->x;
-	this->y = rhs->y;
-	this->z = rhs->z;
+	this->x = rhs.x;
+	this->y = rhs.y;
+	this->z = rhs.z;
 	return *this;
 }
 
@@ -97,4 +100,43 @@ double len(const Vec3<double> A) {
 
 Vec3<double> normalize(const Vec3<double> A) {
 	return A / len(A);
+}
+
+double distance(Vec3<double> A, Vec3<double> B) {
+	return dot(A - B, A - B);
+}
+
+pair<Itsct_stat, Vec3<double>> Sphere::first_intersection(Vec3<double> pos, Vec3<double> angle) {
+	// center the ball at (0, 0, 0)
+	pos = pos - this->center;
+
+	if (dot(pos, pos) <= r * r + eps) { // pos inside the ball
+		return make_pair(Itsct_stat::INSIDE, Vec3<double>());
+	}
+
+	// ||pos + x * angle|| = r, x > 0
+	// transform to Ax^2 + Bx + C = 0
+	const double A = dot(angle, angle);
+	const double B = 2 * dot(angle, pos);
+	const double C = dot(pos, pos) - r * r;
+	// A > 0 for sure
+	const double D = B * B - 4 * A * C;
+	if (D < eps) { // no intersection
+		return make_pair(Itsct_stat::NO_INTERSECTION, Vec3<double>());
+	}
+	const double small_root = (-B - sqrt(D)) / (A + A);
+	if (small_root < eps) {
+		const double big_root = -B / A - small_root;
+		if (big_root < eps) {
+			return make_pair(Itsct_stat::NO_INTERSECTION, Vec3<double>());
+		}
+		return make_pair(Itsct_stat::HAS_INTERSECTION, pos + angle * big_root);
+	}
+	else {
+		return make_pair(Itsct_stat::HAS_INTERSECTION, pos + angle * small_root);
+	}
+}
+
+pair<Itsct_stat, Vec3<double>> Light::first_intersection(Vec3<double> pos, Vec3<double> angle) {
+	return make_pair(Itsct_stat::NO_INTERSECTION, Vec3<double>());
 }
