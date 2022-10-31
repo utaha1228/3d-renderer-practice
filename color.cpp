@@ -1,25 +1,65 @@
 #include "color.h"
 
+// Assignment
 
-RGB operator + (RGB A, RGB B) {
-	return RGB(A.r + B.r, A.g + B.g, A.b + B.b);
+RGB & RGB::operator = (const RGB & rhs) {
+	if (this == &rhs) {
+		return *this;
+	}
+	this->r = rhs.r;
+	this->g = rhs.g;
+	this->b = rhs.b;
+	return *this;
 }
 
-// scalar multiplication
-RGB operator * (RGB A, double B) {
-	return RGB(A.x * B, A.y * B, A.z * B);
+// Compound assignment operators
+
+RGB & RGB::operator += (const RGB &rhs) {
+	this->r += rhs.r;
+	this->g += rhs.g;
+	this->b += rhs.b;
+	return *this;
 }
 
-RGB operator * (double B, RGB A) {
-	return RGB(A.x * B, A.y * B, A.z * B);
+RGB & RGB::operator -= (const RGB &rhs) {
+	this->r -= rhs.r;
+	this->g -= rhs.g;
+	this->b -= rhs.b;
+	return *this;
 }
 
-RGB rescale(RGB A) {
-	const double eps = 1e-6;
-	const double MAX_VAL = 255;
+RGB & RGB::operator *= (const double rhs) {
+	this->r *= rhs;
+	this->g *= rhs;
+	this->b *= rhs;
+	return *this;
+}
+RGB & RGB::operator /= (const double rhs) {
+	this->r /= rhs;
+	this->g /= rhs;
+	this->b /= rhs;
+	return *this;
+}
 
-	double mx = max(A.r, A.g, A.b);
-	if (mx < MAX_VAL) return A;
+// Arithmetic operators
 
-	return RGB(A.r * MAX_VAL / mx, A.g * MAX_VAL / mx, A.b * MAX_VAL / mx);
+const RGB RGB::operator + (const RGB &rhs) const {
+	return RGB(this->r + rhs.r, this->g + rhs.g, this->b + rhs.b);
+}
+
+const RGB RGB::operator - (const RGB &rhs) const {
+	return RGB(this->r - rhs.r, this->g - rhs.g, this->b - rhs.b);
+}
+
+const RGB RGB::operator * (const double rhs) const {
+	return RGB(this->r * rhs, this->g * rhs, this->b * rhs);
+}
+
+const RGB RGB::operator / (const double rhs) const {
+	return RGB(this->r / rhs, this->g / rhs, this->b / rhs);
+}
+
+const RGB copy() const {
+	RGB res = *this;
+	return res;
 }

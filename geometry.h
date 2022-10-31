@@ -1,5 +1,4 @@
-#include <utility>
-using namespace std;
+#pragma once
 
 template <typename T>
 struct Vec3 {
@@ -28,31 +27,8 @@ struct Vec3 {
 	const Vec3<T> operator / (const T rhs) const;
 
 };
+#include "geometry.tpp"
 
-enum Itsct_stat {
-	INSIDE,
-	NO_INTERSECTION,
-	HAS_INTERSECTION,
-};
-
-struct Object {
-	double ambient_coef;
-	double diffuse_coef;
-	double specular_coef;
-	double shininess;
-
-	pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
-};
-
-struct Sphere: Object {
-	Vec3<double> center;
-	double r;
-
-	pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
-};
-
-struct Light: Object {
-	double intensity;
-
-	pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
-};
+double 			len(const Vec3<double>);
+Vec3<double> 	normalize(const Vec3<double>);
+double 			distance(Vec3<double>, Vec3<double>);
