@@ -23,7 +23,7 @@ int Viewer::Display(const std::vector<std::vector<RGB> > &colors) {
       image_.at<cv::Vec3d>(i, j)[2] = colors[i][j].r;
     }
   }
-  cv::imshow("Viewer", image_);
+  cv::imshow(window_name_, image_);
 
   return cv::waitKey(5);
 }
