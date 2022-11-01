@@ -1,12 +1,8 @@
 #include <vector>
 #include <math.h>
 #include <cassert>
-#include "color.h"
-#include "geometry.h"
-#include "objects.h"
+#include "render.h"
 using namespace std;
-
-#define PI 3.14159265358979323
 
 // TODO: implement ray_trace with recursion
 
