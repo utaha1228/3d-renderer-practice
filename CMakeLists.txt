@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(rendering)
 
-include_directories(include)
+find_package(OpenCV REQUIRED)
+
+include_directories(include ${OpenCV_INCLUDE_DIRS})
 
 set(CMAKE_CXX_STANDARD 14)
 set(COMPILE_OPTIONS -Wall)
@@ -17,4 +19,11 @@ add_executable(render
         src/objects.cpp
         src/render.cpp)
 target_link_libraries(render ${COMPILE_OPTIONS})
+
+add_executable(viewer
+        include/viewer.h
+        include/color.h
+        src/viewer.cpp
+        src/color.cpp)
+target_link_libraries(viewer ${COMPILE_OPTIONS} ${OpenCV_LIBS})
 
