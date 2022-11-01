@@ -59,7 +59,7 @@ const RGB RGB::operator / (const double rhs) const {
 	return RGB(this->r / rhs, this->g / rhs, this->b / rhs);
 }
 
-const RGB copy() const {
+const RGB RGB::copy() const {
 	RGB res = *this;
 	return res;
 }

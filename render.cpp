@@ -10,11 +10,11 @@ using namespace std;
 
 // TODO: implement ray_trace with recursion
 
-RGB ray_trace(Vec3<double> camera_pos, Vec3<double> camera_angle, vector<Object> &objs, vector<Light> &lights) {
+RGB ray_trace(Vec3<double> camera_pos, Vec3<double> camera_angle, vector<Object *> &objs, vector<Light> &lights) {
 	Vec3<double> intersection;
 	Object *closest = NULL;
-	for (Object &obj: objs) {
-		auto res = obj.first_intersection(camera_pos, camera_angle);
+	for (Object *obj: objs) {
+		auto res = obj->first_intersection(camera_pos, camera_angle);
 		const Itsct_stat stat = res.first;
 		const Vec3<double> point = res.second;
 
@@ -23,7 +23,7 @@ RGB ray_trace(Vec3<double> camera_pos, Vec3<double> camera_angle, vector<Object>
 		if (stat == Itsct_stat::NO_INTERSECTION) continue;
 
 		if (closest == NULL || distance(camera_pos, point) < distance(camera_pos, intersection)) {
-			closest = &obj;
+			closest = obj;
 			intersection = point;
 		}
 	}
@@ -52,7 +52,7 @@ the pixel at row i (from bottom to top) and column j (from left to right).
 
 vector<vector<RGB>> render(Vec3<double> camera_pos, Vec3<double> camera_angle, 
 	double horizontal_view, double vertical_view, int img_width, int img_height, 
-	vector<Object> objs, vector<Light> lights) {
+	vector<Object *> objs, vector<Light> lights) {
 
 	assert (horizontal_view <= PI);
 	assert (vertical_view <= PI);

@@ -29,6 +29,6 @@ struct Vec3 {
 };
 #include "geometry.tpp"
 
-double 			len(const Vec3<double>);
-Vec3<double> 	normalize(const Vec3<double>);
+double 			len(Vec3<double>);
+Vec3<double> 	normalize(Vec3<double>);
 double 			distance(Vec3<double>, Vec3<double>);

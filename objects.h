@@ -17,16 +17,17 @@ struct Object {
 	double shininess;
 	RGB color;
 
-	Object() {}
-
-	std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
+	virtual std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>) const = 0;
+	virtual Object* copy() const = 0;
 };
 
 struct Sphere: Object {
 	Vec3<double> center;
 	double r;
 
-	std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>);
+	Sphere() {}
+
+	std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>) const;
 };
 
 struct Light {
