@@ -18,7 +18,6 @@ struct Object {
 	RGB color;
 
 	virtual std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>) const = 0;
-	virtual Object* copy() const = 0;
 };
 
 struct Sphere: Object {
