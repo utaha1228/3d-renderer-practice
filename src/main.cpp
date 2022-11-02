@@ -2,11 +2,14 @@
 #include "geometry.h"
 #include "color.h"
 #include "objects.h"
+#include "viewer.h"
 
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <cstring>
+
+#include <opencv2/opencv.hpp>
 
 using namespace std;
 
@@ -24,7 +27,7 @@ void save_image(string filename, vector<vector<RGB>> img) {
     ofs.close();
 }
 
-void test_image() {
+void test_render() {
 	vector<Light> lights;
 	vector<Object*> objs;
 	objs.push_back(new Sphere());
@@ -43,9 +46,17 @@ void test_image() {
 
 	auto res = render(camera_pos, camera_angle, horizontal_view, vertical_view, img_width, img_height, objs, lights);
 	save_image("./tmp.ppm", res);
+
+  Viewer viewer("Render");
+  while (true) {
+    int key = viewer.Display(res);
+    if (key != -1) {
+      printf("Key = %d.\n", key);
+    }
+  }
 }
 
 int main() {
-	test_image();
+	test_render();
 	return 0;
 }

@@ -44,11 +44,16 @@ void TestDisplay() {
       }
     }
 
-    printf("%d\n", viewer.Display(colors));
+    int key = viewer.Display(colors);
+    if (key != -1) {
+      printf("Key = %d\n", viewer.Display(colors));
+    }
   }
 }
 
+/*
 int main () {
   TestDisplay();
   return 0;
 }
+*/
