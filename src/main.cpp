@@ -20,7 +20,7 @@ void save_image(string filename, vector<vector<RGB>> img) {
 	ofstream ofs;
 		ofs.open(filename);
 		ofs << "P6\n" << width << " " << height << "\n255\n";
-		for (int i = height - 1; i >= 0; i--) { // form top to bottom
+		for (int i = 0; i < height; i++) { // form top to bottom
 			for (int j = 0; j < width; j++) {
 				int r, g, b;
 				img[i][j].to_color(r, g, b);

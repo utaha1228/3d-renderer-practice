@@ -56,7 +56,7 @@ objs: the objects on the map.
 lights: all the light sources.
 
 Return a 2D color array which represents the rendered image. Index i, j represents 
-the pixel at row i (from bottom to top) and column j (from left to right).
+the pixel at row i (from top to bottom) and column j (from left to right).
 */
 
 vector<vector<RGB>> render(Vec3<double> camera_pos, Vec3<double> camera_angle, 
@@ -75,15 +75,15 @@ vector<vector<RGB>> render(Vec3<double> camera_pos, Vec3<double> camera_angle,
 	camera_angle = normalize(camera_angle);
 
 	const double _ = hypot(camera_angle.x, camera_angle.y);
-	const Vec3<double> up = Vec3<double>(-camera_angle.z / _ * camera_angle.x, -camera_angle.z / _ * camera_angle.y , _);
-	const Vec3<double> right = cross(camera_angle, up);
+	const Vec3<double> down = Vec3<double>(camera_angle.z / _ * camera_angle.x, camera_angle.z / _ * camera_angle.y , -_);
+	const Vec3<double> right = cross(down, camera_angle);
 	const double width = 2 * tan(horizontal_view / 2);
 	const double height = 2 * tan(vertical_view / 2);
 	for (int i = 0; i < img_height; i++) {
 		for (int j = 0; j < img_width; j++) {
 			Vec3<double> angle = camera_angle
 				+ (width * (2 * j + 1) / (2 * img_width) - width / 2) * right
-				+ (height * (2 * i + 1) / (2 * img_height) - height / 2) * up;
+				+ (height * (2 * i + 1) / (2 * img_height) - height / 2) * down;
 
 			img[i][j] = ray_trace(camera_pos, angle, objs, lights);
 		}
