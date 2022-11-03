@@ -11,11 +11,12 @@ set(COMPILE_OPTIONS -Wall)
 add_executable(render
         src/main.cpp
         include/color.h
+        include/const.h
         include/geometry.h
         include/geometry.tpp
         include/objects.h
         include/viewer.h
-	include/directions.h
+        include/directions.h
         src/color.cpp
         src/geometry.cpp
         src/objects.cpp
