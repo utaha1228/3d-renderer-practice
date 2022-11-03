@@ -1,3 +1,5 @@
+#include "color.h"
+
 #define PI 3.14159265358979323
 
 #define WHITE RGB(255, 255, 255)
