@@ -17,14 +17,14 @@ void save_image(string filename, vector<vector<RGB>> img) {
 	const uint height = img.size();
 	const uint width = img[0].size();
 	ofstream ofs;
-    ofs.open(filename);
-    ofs << "P6\n" << width << " " << height << "\n255\n";
-    for (int i = height - 1; i >= 0; i--) { // form top to bottom
-    	for (int j = 0; j < width; j++) {
-            ofs << (char) img[i][j].r << (char) img[i][j].g << (char) img[i][j].b;
-    	}
-    }
-    ofs.close();
+		ofs.open(filename);
+		ofs << "P6\n" << width << " " << height << "\n255\n";
+		for (int i = height - 1; i >= 0; i--) { // form top to bottom
+			for (int j = 0; j < width; j++) {
+				ofs << (char) img[i][j].r << (char) img[i][j].g << (char) img[i][j].b;
+			}
+		}
+		ofs.close();
 }
 
 void test_render() {
@@ -47,13 +47,13 @@ void test_render() {
 	auto res = render(camera_pos, camera_angle, horizontal_view, vertical_view, img_width, img_height, objs, lights);
 	save_image("./tmp.ppm", res);
 
-  Viewer viewer("Render");
-  while (true) {
-    int key = viewer.Display(res);
-    if (key != -1) {
-      printf("Key = %d.\n", key);
-    }
-  }
+	Viewer viewer("Render");
+	while (true) {
+		int key = viewer.Display(res);
+		if (key != -1) {
+			printf("Key = %d.\n", key);
+		}
+	}
 }
 
 int main() {

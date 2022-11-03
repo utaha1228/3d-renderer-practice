@@ -15,11 +15,13 @@ add_executable(render
         include/geometry.tpp
         include/objects.h
         include/viewer.h
+	include/directions.h
         src/color.cpp
         src/geometry.cpp
         src/objects.cpp
         src/render.cpp
-        src/viewer.cpp)
+        src/viewer.cpp
+	src/directions.cpp)
 target_link_libraries(render ${COMPILE_OPTIONS} ${OpenCV_LIBS})
 
 # add_executable(viewer
