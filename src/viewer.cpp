@@ -1,12 +1,14 @@
+#include "color.h"
 #include "viewer.h"
 
 #include <cassert>
+#include <tuple>
 #include <vector>
 
 #include <opencv2/opencv.hpp>
 
 void Viewer::EmptyFrame_(int rows, int cols) {
-  image_ = cv::Mat::zeros(rows, cols, CV_64FC3);
+  image_ = cv::Mat::zeros(rows, cols, CV_8UC3);
 }
 
 int Viewer::Display(const std::vector<std::vector<RGB> > &colors) {
@@ -18,9 +20,10 @@ int Viewer::Display(const std::vector<std::vector<RGB> > &colors) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
       // Default channel is BGR in OpenCV.
-      image_.at<cv::Vec3d>(i, j)[0] = colors[i][j].b;
-      image_.at<cv::Vec3d>(i, j)[1] = colors[i][j].g;
-      image_.at<cv::Vec3d>(i, j)[2] = colors[i][j].r;
+      int r, g, b;
+      colors[i][j].to_color(r, g, b);
+      cv::Vec3b &pixel = image_.at<cv::Vec3b>(i, j);
+      std::tie(pixel[2], pixel[1], pixel[0]) = std::make_tuple((unsigned char)r, (unsigned char)g, (unsigned char)b);
     }
   }
   cv::imshow(window_name_, image_);
