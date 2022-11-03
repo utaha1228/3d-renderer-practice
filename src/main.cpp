@@ -1,6 +1,7 @@
+#include "color.h"
+#include "directions.h"
 #include "render.h"
 #include "geometry.h"
-#include "color.h"
 #include "objects.h"
 #include "viewer.h"
 
@@ -51,8 +52,10 @@ void test_render() {
 	while (true) {
 		int key = viewer.Display(res);
 		if (key != -1) {
+			update_camera_pos(camera_pos, camera_angle, key);
 			printf("Key = %d.\n", key);
 		}
+		res = render(camera_pos, camera_angle, horizontal_view, vertical_view, img_width, img_height, objs, lights);
 	}
 }
 

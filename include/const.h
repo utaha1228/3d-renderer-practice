@@ -9,3 +9,5 @@
 #define BLUE RGB(0, 0, 255)
 #define YELLOW RGB(255, 255, 0)
 #define PURPLE RGB(127, 0, 255)
+
+#define MOVE_FACTOR 0.1
