@@ -18,6 +18,7 @@ struct Object {
 	RGB color;
 
 	virtual std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>) const = 0;
+	virtual Vec3<double> 						norm_vec(Vec3<double>) const = 0;
 };
 
 struct Sphere: Object {
@@ -27,6 +28,7 @@ struct Sphere: Object {
 	Sphere() {}
 
 	std::pair<Itsct_stat, Vec3<double>> first_intersection(Vec3<double>, Vec3<double>) const;
+	Vec3<double>						norm_vec(Vec3<double>) const;
 };
 
 struct Light {

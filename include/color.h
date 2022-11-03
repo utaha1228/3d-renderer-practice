@@ -27,6 +27,9 @@ struct RGB {
 	const RGB operator / (const double rhs) const;
 
 	const RGB copy() const;
+
+	RGB rescale() const;
+	void to_color(int &r, int &g, int &b) const;
 };
 
 #define WHITE RGB(255, 255, 255)

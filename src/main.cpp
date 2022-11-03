@@ -21,7 +21,9 @@ void save_image(string filename, vector<vector<RGB>> img) {
 		ofs << "P6\n" << width << " " << height << "\n255\n";
 		for (int i = height - 1; i >= 0; i--) { // form top to bottom
 			for (int j = 0; j < width; j++) {
-				ofs << (char) img[i][j].r << (char) img[i][j].g << (char) img[i][j].b;
+				int r, g, b;
+				img[i][j].to_color(r, g, b);
+				ofs << (char)r << (char)g << (char)b;
 			}
 		}
 		ofs.close();
@@ -29,6 +31,11 @@ void save_image(string filename, vector<vector<RGB>> img) {
 
 void test_render() {
 	vector<Light> lights;
+	Light only_light = Light();
+	only_light.pos = Vec3<double>(-100, 100, 0);
+	only_light.intensity = 1;
+	lights.push_back(only_light);
+
 	vector<Object*> objs;
 	objs.push_back(new Sphere());
 	((Sphere *)objs[0])->center = Vec3<double>(10, 1, -1);

@@ -35,3 +35,6 @@ std::pair<Itsct_stat, Vec3<double>> Sphere::first_intersection(Vec3<double> pos,
 	}
 }
 
+Vec3<double> Sphere::norm_vec(Vec3<double> point) const {
+	return normalize(point - this->center);
+}

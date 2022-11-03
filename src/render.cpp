@@ -1,12 +1,19 @@
+#include "render.h"
+
 #include <vector>
 #include <math.h>
 #include <cassert>
-#include "render.h"
-using namespace std;
+#include <algorithm>
 
-// TODO: implement ray_trace with recursion
+/* 
+TODO(utaha): 
+1. implement lighting
+2. implement specular lighting?
+3. introduce shadow
+4. implement reflection/refraction
+*/
 
-RGB ray_trace(Vec3<double> camera_pos, Vec3<double> camera_angle, vector<Object *> &objs, vector<Light> &lights) {
+RGB ray_trace(Vec3<double> camera_pos, Vec3<double> camera_angle, std::vector<Object *> &objs, std::vector<Light> &lights) {
 	Vec3<double> intersection;
 	Object *closest = NULL;
 	for (Object *obj: objs) {
@@ -28,7 +35,13 @@ RGB ray_trace(Vec3<double> camera_pos, Vec3<double> camera_angle, vector<Object 
 		return RGB(255, 255, 255);
 	}
 	else {
-		return closest->color.copy();
+		double total_intensity = 0;
+		for (Light light: lights) {
+			const Vec3<double> light_dir = normalize(light.pos - intersection);
+			const Vec3<double> norm_vec = closest->norm_vec(intersection);
+			total_intensity += std::max(0., dot(light_dir, norm_vec)) * light.intensity;
+		}
+		return (closest->color * total_intensity).rescale();
 	}
 }
 
@@ -48,12 +61,12 @@ the pixel at row i (from bottom to top) and column j (from left to right).
 
 vector<vector<RGB>> render(Vec3<double> camera_pos, Vec3<double> camera_angle, 
 	double horizontal_view, double vertical_view, int img_width, int img_height, 
-	vector<Object *> objs, vector<Light> lights) {
+	std::vector<Object *> objs, std::vector<Light> lights) {
 
 	assert (horizontal_view <= PI);
 	assert (vertical_view <= PI);
 
-	vector<vector<RGB>> img;
+	std::vector<vector<RGB>> img;
 	img.resize(img_height);
 	for (int i = 0; i < img_height; i++) {
 		img[i].resize(img_width);
