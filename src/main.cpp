@@ -48,7 +48,7 @@ void test_render() {
 	((Sphere *)objs[1])->r = 4;
 	((Sphere *)objs[1])->color = GREEN;
 
-	Vec3<double> camera_pos(0, 0, 0), camera_angle(1, 0, 0);
+	Vec3<double> camera_pos(0, 4, 0), camera_angle(1, 0, 0);
 	double horizontal_view = PI * 2 / 3, vertical_view = horizontal_view = PI * 2 / 3;
 	int img_width = 500, img_height = 500;
 

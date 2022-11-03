@@ -10,5 +10,5 @@ Vec3<double> normalize(Vec3<double> A) {
 }
 
 double distance(Vec3<double> A, Vec3<double> B) {
-	return dot(A - B, A - B);
+	return len(A - B);
 }

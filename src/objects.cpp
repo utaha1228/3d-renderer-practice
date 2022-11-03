@@ -5,7 +5,7 @@
 #define eps 1e-7
 
 std::pair<Itsct_stat, Vec3<double>> Sphere::first_intersection(Vec3<double> pos, Vec3<double> angle) const {
-	// center the ball at (0, 0, 0)
+	// center the ball at (0, 0, 0), need to change the coordinate back later
 	pos = pos - this->center;
 
 	if (dot(pos, pos) <= r * r + eps) { // pos inside the ball
@@ -28,10 +28,10 @@ std::pair<Itsct_stat, Vec3<double>> Sphere::first_intersection(Vec3<double> pos,
 		if (big_root < eps) {
 			return std::make_pair(Itsct_stat::NO_INTERSECTION, Vec3<double>());
 		}
-		return std::make_pair(Itsct_stat::HAS_INTERSECTION, pos + angle * big_root);
+		return std::make_pair(Itsct_stat::HAS_INTERSECTION, this->center + pos + angle * big_root);
 	}
 	else {
-		return std::make_pair(Itsct_stat::HAS_INTERSECTION, pos + angle * small_root);
+		return std::make_pair(Itsct_stat::HAS_INTERSECTION, this->center + pos + angle * small_root);
 	}
 }
 
