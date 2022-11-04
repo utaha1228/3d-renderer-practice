@@ -6,7 +6,7 @@ find_package(OpenCV REQUIRED)
 include_directories(include ${OpenCV_INCLUDE_DIRS})
 
 set(CMAKE_CXX_STANDARD 14)
-set(COMPILE_OPTIONS -Wall)
+set(COMPILE_OPTIONS -Wall -Ofast)
 
 add_executable(render
         src/main.cpp
