@@ -13,33 +13,25 @@ Vec3<T> & Vec3<T>::operator = (const Vec3<T> & rhs) {
 
 template <typename T>
 Vec3<T> & Vec3<T>::operator += (const Vec3<T> &rhs) {
-	this->x += rhs.x;
-	this->y += rhs.y;
-	this->z += rhs.z; 
+	*this = *this + rhs;
 	return *this;
 }
 
 template <typename T>
 Vec3<T> & Vec3<T>::operator -= (const Vec3<T> &rhs) {
-	this->x -= rhs.x;
-	this->y -= rhs.y;
-	this->z -= rhs.z; 
+	*this = *this - rhs;
 	return *this;
 }
 
 template <typename T>
 Vec3<T> & Vec3<T>::operator *= (const T rhs) {
-	this->x *= rhs;
-	this->y *= rhs;
-	this->z *= rhs; 
+	*this = *this * rhs;
 	return *this;
 }
 
 template <typename T>
 Vec3<T> & Vec3<T>::operator /= (const T rhs) {
-	this->x /= rhs;
-	this->y /= rhs;
-	this->z /= rhs; 
+	*this = *this / rhs;
 	return *this;
 }
 

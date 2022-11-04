@@ -17,29 +17,21 @@ RGB & RGB::operator = (const RGB & rhs) {
 // Compound assignment operators
 
 RGB & RGB::operator += (const RGB &rhs) {
-	this->r += rhs.r;
-	this->g += rhs.g;
-	this->b += rhs.b;
+	*this = *this + rhs;
 	return *this;
 }
 
 RGB & RGB::operator -= (const RGB &rhs) {
-	this->r -= rhs.r;
-	this->g -= rhs.g;
-	this->b -= rhs.b;
+	*this = *this - rhs;
 	return *this;
 }
 
 RGB & RGB::operator *= (const double rhs) {
-	this->r *= rhs;
-	this->g *= rhs;
-	this->b *= rhs;
+	*this = *this * rhs;
 	return *this;
 }
 RGB & RGB::operator /= (const double rhs) {
-	this->r /= rhs;
-	this->g /= rhs;
-	this->b /= rhs;
+	*this = *this / rhs;
 	return *this;
 }
 
