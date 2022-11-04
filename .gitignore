@@ -60,3 +60,6 @@ build
 
 # images generated while testing
 *.ppm
+
+# Desktop Services Store
+.DS_Store
