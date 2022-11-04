@@ -1,17 +1,15 @@
+#include <opencv2/opencv.hpp>
+#include <string>
+#include <vector>
+
 #include "color.h"
 
-#include <vector>
-#include <string>
-
-#include <opencv2/opencv.hpp>
-
 struct Viewer {
-public:
-
-  Viewer(std::string window_name = "Viewer"): window_name_(window_name) {}
+ public:
+  Viewer(std::string window_name = "Viewer") : window_name_(window_name) {}
   int Display(const std::vector<std::vector<RGB> > &colors);
 
-private:
+ private:
   std::string window_name_;
   cv::Mat image_;
 
